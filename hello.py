@@ -50,3 +50,26 @@ if __name__ == "__main__":
 print(f"result{hello_world}" )
 
 
+class User:
+    def __init__(self, name):
+        self.name = name
+        self.is_logged_in = False
+
+
+def create_blog_post(user, title, content):
+    if user.is_logged_in:
+        print(f"This is {user.name}'s new blog post: {title} {content}")
+    else:
+        print("User must be logged in!")
+
+
+def is_authenticated_decorator(function):
+    def wrapper(*args, **kwargs):
+        if args[0].is_logged_in:
+            function(args[0], args[1], args[2])
+    return wrapper
+
+
+new_user = User("Angela")
+new_user.is_logged_in = True
+create_blog_post(new_user, "Hello", "This is my first post")
